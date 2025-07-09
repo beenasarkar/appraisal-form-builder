@@ -54,8 +54,8 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ form, onUpdate }) => {
   return (
     <div className="space-y-6">
       {/* Form Title */}
-      <Card className="shadow-lg border-0">
-        <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+      <Card className="shadow-xl border-0 overflow-hidden">
+        <CardHeader className="rldatix-gradient text-white">
           <div className="flex items-center justify-between">
             {editingTitle ? (
               <Input
@@ -63,12 +63,12 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ form, onUpdate }) => {
                 onChange={(e) => updateTitle(e.target.value)}
                 onBlur={() => setEditingTitle(false)}
                 onKeyDown={(e) => e.key === 'Enter' && setEditingTitle(false)}
-                className="bg-white text-black text-xl font-bold"
+                className="bg-white text-[hsl(var(--rldatix-navy))] text-xl font-bold border-0 shadow-lg"
                 autoFocus
               />
             ) : (
               <CardTitle 
-                className="text-xl cursor-pointer hover:bg-white/10 p-2 rounded"
+                className="text-xl cursor-pointer hover:bg-white/10 p-3 rounded-lg transition-colors"
                 onClick={() => setEditingTitle(true)}
               >
                 {form.title}
@@ -79,26 +79,27 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ form, onUpdate }) => {
       </Card>
 
       {/* Sections */}
-      <div className="space-y-4">
+      <div className="space-y-6">
         {form.sections.map((section, index) => (
-          <Card key={section.id} className="shadow-md border-l-4 border-l-blue-500">
-            <CardHeader className="bg-gray-50">
+          <Card key={section.id} className="shadow-lg border-0 border-l-4 border-l-[hsl(var(--rldatix-blue))] overflow-hidden">
+            <CardHeader className="bg-[hsl(var(--rldatix-light-blue))]">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <GripVertical className="h-5 w-5 text-gray-400" />
+                <div className="flex items-center space-x-4">
+                  <GripVertical className="h-5 w-5 text-[hsl(var(--rldatix-navy))] opacity-60" />
                   <TrafficLight status={section.status} />
-                  <CardTitle className="text-lg">{section.title}</CardTitle>
+                  <CardTitle className="text-lg text-[hsl(var(--rldatix-navy))]">{section.title}</CardTitle>
                 </div>
                 <Button
                   variant="destructive"
                   size="sm"
                   onClick={() => deleteSection(section.id)}
+                  className="bg-[hsl(var(--rldatix-red))] hover:bg-[hsl(var(--rldatix-red))] shadow-md"
                 >
                   <Trash2 className="h-4 w-4" />
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="pt-6">
+            <CardContent className="pt-6 bg-white">
               <SectionBuilder
                 section={section}
                 onUpdate={(updatedSection) => updateSection(section.id, updatedSection)}
@@ -111,7 +112,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ form, onUpdate }) => {
       {/* Add Section Button */}
       <Button 
         onClick={addSection} 
-        className="w-full h-12 bg-green-600 hover:bg-green-700 text-white border-2 border-dashed border-green-300 bg-green-50 hover:bg-green-100"
+        className="w-full h-14 rldatix-button-success border-2 border-dashed border-[hsl(var(--rldatix-green))] bg-green-50 hover:bg-green-100 text-[hsl(var(--rldatix-green))] hover:text-white shadow-lg transition-all"
         variant="outline"
       >
         <Plus className="h-5 w-5 mr-2" />
