@@ -40,11 +40,11 @@ const AppraisalBuilder = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-lg">
-                <span className="text-[hsl(var(--rldatix-navy))] font-bold text-xl">RL</span>
+                <span className="text-[hsl(var(--rldatix-green))] font-bold text-xl">RL</span>
               </div>
               <div>
                 <h1 className="text-3xl font-bold tracking-tight">RLDATIX</h1>
-                <p className="text-blue-100 text-sm font-medium">Appraisal Form Builder</p>
+                <p className="text-green-100 text-sm font-medium">Appraisal Form Builder</p>
               </div>
             </div>
             <Button onClick={createNewForm} className="rldatix-button-success shadow-lg">
@@ -72,7 +72,7 @@ const AppraisalBuilder = () => {
                       className={`w-full justify-start text-left h-auto py-3 ${
                         currentForm?.id === form.id 
                           ? 'rldatix-button-primary' 
-                          : 'hover:bg-[hsl(var(--rldatix-light-blue))] hover:text-[hsl(var(--rldatix-navy))]'
+                          : 'hover:bg-[hsl(var(--rldatix-light-green))] hover:text-[hsl(var(--rldatix-green))]'
                       }`}
                       onClick={() => setCurrentForm(form)}
                     >
@@ -106,7 +106,7 @@ const AppraisalBuilder = () => {
                     className={`rounded-r-none ${
                       activeTab === 'builder' 
                         ? 'rldatix-button-primary' 
-                        : 'border-[hsl(var(--rldatix-blue))] text-[hsl(var(--rldatix-navy))] hover:bg-[hsl(var(--rldatix-light-blue))]'
+                        : 'border-[hsl(var(--rldatix-bright-green))] text-[hsl(var(--rldatix-green))] hover:bg-[hsl(var(--rldatix-light-green))]'
                     }`}
                   >
                     <Settings className="w-4 h-4 mr-2" />
@@ -118,7 +118,7 @@ const AppraisalBuilder = () => {
                     className={`rounded-none ${
                       activeTab === 'preview' 
                         ? 'rldatix-button-primary' 
-                        : 'border-[hsl(var(--rldatix-blue))] text-[hsl(var(--rldatix-navy))] hover:bg-[hsl(var(--rldatix-light-blue))]'
+                        : 'border-[hsl(var(--rldatix-bright-green))] text-[hsl(var(--rldatix-green))] hover:bg-[hsl(var(--rldatix-light-green))]'
                     }`}
                   >
                     <Eye className="w-4 h-4 mr-2" />
@@ -130,7 +130,7 @@ const AppraisalBuilder = () => {
                     className={`rounded-l-none ${
                       activeTab === 'workflow' 
                         ? 'rldatix-button-primary' 
-                        : 'border-[hsl(var(--rldatix-blue))] text-[hsl(var(--rldatix-navy))] hover:bg-[hsl(var(--rldatix-light-blue))]'
+                        : 'border-[hsl(var(--rldatix-bright-green))] text-[hsl(var(--rldatix-green))] hover:bg-[hsl(var(--rldatix-light-green))]'
                     }`}
                   >
                     <Save className="w-4 h-4 mr-2" />
@@ -152,10 +152,10 @@ const AppraisalBuilder = () => {
             ) : (
               <Card className="shadow-xl border-0 overflow-hidden">
                 <CardContent className="p-12 text-center bg-white">
-                  <div className="w-20 h-20 bg-[hsl(var(--rldatix-light-blue))] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                    <Plus className="w-10 h-10 text-[hsl(var(--rldatix-navy))]" />
+                  <div className="w-20 h-20 bg-[hsl(var(--rldatix-light-green))] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <Plus className="w-10 h-10 text-[hsl(var(--rldatix-green))]" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-3 text-[hsl(var(--rldatix-navy))]">Create Your First Form</h3>
+                  <h3 className="text-2xl font-bold mb-3 text-[hsl(var(--rldatix-green))]">Create Your First Form</h3>
                   <p className="text-muted-foreground mb-8 text-lg">
                     Start building appraisal forms with our powerful template builder
                   </p>

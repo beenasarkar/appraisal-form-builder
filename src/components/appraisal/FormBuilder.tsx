@@ -63,7 +63,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ form, onUpdate }) => {
                 onChange={(e) => updateTitle(e.target.value)}
                 onBlur={() => setEditingTitle(false)}
                 onKeyDown={(e) => e.key === 'Enter' && setEditingTitle(false)}
-                className="bg-white text-[hsl(var(--rldatix-navy))] text-xl font-bold border-0 shadow-lg"
+                className="bg-white text-[hsl(var(--rldatix-green))] text-xl font-bold border-0 shadow-lg"
                 autoFocus
               />
             ) : (
@@ -81,13 +81,13 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ form, onUpdate }) => {
       {/* Sections */}
       <div className="space-y-6">
         {form.sections.map((section, index) => (
-          <Card key={section.id} className="shadow-lg border-0 border-l-4 border-l-[hsl(var(--rldatix-blue))] overflow-hidden">
-            <CardHeader className="bg-[hsl(var(--rldatix-light-blue))]">
+          <Card key={section.id} className="shadow-lg border-0 border-l-4 border-l-[hsl(var(--rldatix-bright-green))] overflow-hidden">
+            <CardHeader className="bg-[hsl(var(--rldatix-light-green))]">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
-                  <GripVertical className="h-5 w-5 text-[hsl(var(--rldatix-navy))] opacity-60" />
+                  <GripVertical className="h-5 w-5 text-[hsl(var(--rldatix-green))] opacity-60" />
                   <TrafficLight status={section.status} />
-                  <CardTitle className="text-lg text-[hsl(var(--rldatix-navy))]">{section.title}</CardTitle>
+                  <CardTitle className="text-lg text-[hsl(var(--rldatix-green))]">{section.title}</CardTitle>
                 </div>
                 <Button
                   variant="destructive"
@@ -112,7 +112,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ form, onUpdate }) => {
       {/* Add Section Button */}
       <Button 
         onClick={addSection} 
-        className="w-full h-14 rldatix-button-success border-2 border-dashed border-[hsl(var(--rldatix-green))] bg-green-50 hover:bg-green-100 text-[hsl(var(--rldatix-green))] hover:text-white shadow-lg transition-all"
+        className="w-full h-14 rldatix-button-success border-2 border-dashed border-[hsl(var(--rldatix-success))] bg-green-50 hover:bg-green-100 text-[hsl(var(--rldatix-success))] hover:text-white shadow-lg transition-all"
         variant="outline"
       >
         <Plus className="h-5 w-5 mr-2" />
