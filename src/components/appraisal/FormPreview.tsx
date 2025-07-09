@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,11 +7,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Mic, Sparkles, Upload, Heart, Meh, Frown } from 'lucide-react';
+import { Mic, MicOff, Sparkles, Upload, Heart, Meh, Frown } from 'lucide-react';
 import { AppraisalForm, FormField, SentimentAnalysis } from '@/types/appraisal';
 import { TrafficLight } from './TrafficLight';
 import { SentimentIndicator } from './SentimentIndicator';
 import { ScoreInput } from './ScoreInput';
+import { useSpeechRecognition } from '@/hooks/useSpeechRecognition';
 
 interface FormPreviewProps {
   form: AppraisalForm;
@@ -21,6 +21,7 @@ interface FormPreviewProps {
 export const FormPreview: React.FC<FormPreviewProps> = ({ form }) => {
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [sentimentData, setSentimentData] = useState<Record<string, SentimentAnalysis>>({});
+  const [activeField, setActiveField] = useState<string | null>(null);
 
   const updateFieldValue = (fieldId: string, value: any) => {
     setFormData(prev => ({ ...prev, [fieldId]: value }));
@@ -36,8 +37,40 @@ export const FormPreview: React.FC<FormPreviewProps> = ({ form }) => {
     setSentimentData(prev => ({ ...prev, [fieldId]: mockSentiment }));
   };
 
+  const handleDictateResult = (fieldId: string, transcript: string) => {
+    const currentValue = formData[fieldId] || '';
+    const newValue = currentValue + (currentValue ? ' ' : '') + transcript;
+    updateFieldValue(fieldId, newValue);
+  };
+
+  const handleDictateError = (error: string) => {
+    console.error('Speech recognition error:', error);
+  };
+
+  const { isListening, isSupported, toggleListening } = useSpeechRecognition({
+    onResult: (transcript) => {
+      if (activeField) {
+        handleDictateResult(activeField, transcript);
+      }
+    },
+    onError: handleDictateError
+  });
+
+  const handleDictateClick = (fieldId: string) => {
+    if (activeField === fieldId && isListening) {
+      setActiveField(null);
+      toggleListening();
+    } else {
+      setActiveField(fieldId);
+      if (!isListening) {
+        toggleListening();
+      }
+    }
+  };
+
   const renderField = (field: FormField) => {
     const fieldValue = formData[field.id];
+    const isActiveForDictation = activeField === field.id && isListening;
 
     switch (field.type) {
       case 'label':
@@ -62,7 +95,9 @@ export const FormPreview: React.FC<FormPreviewProps> = ({ form }) => {
                     }
                   }}
                   placeholder={field.placeholder}
-                  className="min-h-24 resize-y border-2 border-[hsl(var(--rldatix-blue))] focus:border-[hsl(var(--rldatix-navy))]"
+                  className={`min-h-24 resize-y border-2 border-[hsl(var(--rldatix-blue))] focus:border-[hsl(var(--rldatix-navy))] ${
+                    isActiveForDictation ? 'ring-2 ring-red-500 ring-opacity-50' : ''
+                  }`}
                 />
               ) : (
                 <Input
@@ -74,15 +109,29 @@ export const FormPreview: React.FC<FormPreviewProps> = ({ form }) => {
                     }
                   }}
                   placeholder={field.placeholder}
-                  className="border-2 border-[hsl(var(--rldatix-blue))] focus:border-[hsl(var(--rldatix-navy))]"
+                  className={`border-2 border-[hsl(var(--rldatix-blue))] focus:border-[hsl(var(--rldatix-navy))] ${
+                    isActiveForDictation ? 'ring-2 ring-red-500 ring-opacity-50' : ''
+                  }`}
                 />
               )}
               <div className="flex justify-between items-center mt-3">
                 <div className="flex space-x-2">
                   {field.settings?.dictate && (
-                    <Button variant="outline" size="sm" className="rldatix-button-primary">
-                      <Mic className="h-4 w-4 mr-2" />
-                      Dictate
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={() => handleDictateClick(field.id)}
+                      disabled={!isSupported}
+                      className={`rldatix-button-primary ${
+                        isActiveForDictation ? 'bg-red-500 text-white hover:bg-red-600' : ''
+                      }`}
+                    >
+                      {isActiveForDictation ? (
+                        <MicOff className="h-4 w-4 mr-2" />
+                      ) : (
+                        <Mic className="h-4 w-4 mr-2" />
+                      )}
+                      {isActiveForDictation ? 'Stop' : 'Dictate'}
                     </Button>
                   )}
                   {field.settings?.summarize && (
