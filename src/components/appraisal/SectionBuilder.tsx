@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Plus, Trash2, Mic, Sparkles } from 'lucide-react';
+import { Plus, Trash2, Mic, Sparkles, Star, BarChart3, Heart } from 'lucide-react';
 import { FormSection, FormField } from '@/types/appraisal';
 import { TrafficLight } from './TrafficLight';
 
@@ -37,7 +37,14 @@ export const SectionBuilder: React.FC<SectionBuilderProps> = ({ section, onUpdat
         settings: {
           expandable: true,
           dictate: false,
-          summarize: false
+          summarize: false,
+          sentiment: false
+        }
+      }),
+      ...(type === 'score' && {
+        settings: {
+          minScore: 1,
+          maxScore: 10
         }
       }),
       ...((['radio', 'dropdown', 'multiselect'].includes(type)) && {
@@ -67,12 +74,14 @@ export const SectionBuilder: React.FC<SectionBuilderProps> = ({ section, onUpdat
   };
 
   const fieldTypes = [
-    { value: 'label', label: 'Label' },
-    { value: 'textbox', label: 'Text Box' },
-    { value: 'radio', label: 'Radio Buttons' },
-    { value: 'attachment', label: 'Attachment' },
-    { value: 'dropdown', label: 'Dropdown' },
-    { value: 'multiselect', label: 'Multi-select' }
+    { value: 'label', label: 'Label', icon: Plus },
+    { value: 'textbox', label: 'Text Box', icon: Plus },
+    { value: 'radio', label: 'Radio Buttons', icon: Plus },
+    { value: 'attachment', label: 'Attachment', icon: Plus },
+    { value: 'dropdown', label: 'Dropdown', icon: Plus },
+    { value: 'multiselect', label: 'Multi-select', icon: Plus },
+    { value: 'score', label: 'Score (1-10)', icon: Star },
+    { value: 'sentiment', label: 'Sentiment', icon: Heart }
   ];
 
   return (
@@ -123,16 +132,16 @@ export const SectionBuilder: React.FC<SectionBuilderProps> = ({ section, onUpdat
       {/* Add Field Buttons */}
       <div className="border-t pt-4">
         <Label className="text-sm font-medium text-gray-700 mb-3 block">Add Field:</Label>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-4 gap-2">
           {fieldTypes.map((type) => (
             <Button
               key={type.value}
               variant="outline"
               size="sm"
               onClick={() => addField(type.value as FormField['type'])}
-              className="h-10"
+              className="h-12 flex flex-col items-center justify-center text-xs hover:bg-[hsl(var(--rldatix-light-blue))] hover:text-[hsl(var(--rldatix-navy))]"
             >
-              <Plus className="h-3 w-3 mr-1" />
+              <type.icon className="h-4 w-4 mb-1" />
               {type.label}
             </Button>
           ))}
@@ -223,6 +232,46 @@ const FieldEditor: React.FC<FieldEditorProps> = ({ field, onUpdate, onDelete }) 
                 <Sparkles className="h-3 w-3 mr-1" />
                 Summarize
               </Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                checked={field.settings?.sentiment || false}
+                onCheckedChange={(checked) => updateSettings({ sentiment: checked })}
+              />
+              <Label className="text-sm flex items-center">
+                <Heart className="h-3 w-3 mr-1" />
+                Sentiment Analysis
+              </Label>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {field.type === 'score' && (
+        <div className="space-y-3 border-t pt-3">
+          <Label className="text-sm font-medium">Score Range:</Label>
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
+              <Label className="text-sm">Min:</Label>
+              <Input
+                type="number"
+                value={field.settings?.minScore || 1}
+                onChange={(e) => updateSettings({ minScore: parseInt(e.target.value) || 1 })}
+                className="w-20"
+                min="1"
+                max="10"
+              />
+            </div>
+            <div className="flex items-center space-x-2">
+              <Label className="text-sm">Max:</Label>
+              <Input
+                type="number"
+                value={field.settings?.maxScore || 10}
+                onChange={(e) => updateSettings({ maxScore: parseInt(e.target.value) || 10 })}
+                className="w-20"
+                min="1"
+                max="10"
+              />
             </div>
           </div>
         </div>

@@ -17,7 +17,7 @@ export interface FormSection {
 
 export interface FormField {
   id: string;
-  type: 'label' | 'textbox' | 'radio' | 'attachment' | 'dropdown' | 'multiselect';
+  type: 'label' | 'textbox' | 'radio' | 'attachment' | 'dropdown' | 'multiselect' | 'score' | 'sentiment';
   label: string;
   required?: boolean;
   options?: string[];
@@ -27,6 +27,9 @@ export interface FormField {
     expandable?: boolean;
     dictate?: boolean;
     summarize?: boolean;
+    sentiment?: boolean;
+    minScore?: number;
+    maxScore?: number;
   };
 }
 
@@ -37,4 +40,10 @@ export interface WorkflowProcess {
   appraisalMeeting: boolean;
   postAppraisal: boolean;
   assignedForm?: string;
+}
+
+export interface SentimentAnalysis {
+  score: number;
+  label: 'positive' | 'neutral' | 'negative';
+  confidence: number;
 }

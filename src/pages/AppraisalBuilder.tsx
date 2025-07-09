@@ -34,21 +34,24 @@ const AppraisalBuilder = () => {
 
   return (
     <div className="min-h-screen rldatix-card-gradient">
-      {/* RLDATIX Header */}
-      <header className="rldatix-gradient text-white shadow-lg">
+      {/* RLDATIX Official Header */}
+      <header className="rldatix-gradient text-white shadow-2xl">
         <div className="container mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-lg">
-                <span className="text-[hsl(var(--rldatix-green))] font-bold text-xl">RL</span>
+            <div className="flex items-center space-x-6">
+              {/* RLDATIX Official Logo */}
+              <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-xl">
+                <div className="text-[hsl(var(--rldatix-navy))] font-bold text-2xl tracking-tight">
+                  RL
+                </div>
               </div>
               <div>
-                <h1 className="text-3xl font-bold tracking-tight">RLDATIX</h1>
-                <p className="text-green-100 text-sm font-medium">Appraisal Form Builder</p>
+                <h1 className="text-4xl font-bold tracking-tight">RLDATIX</h1>
+                <p className="text-blue-100 text-lg font-medium">Appraisal Form Builder</p>
               </div>
             </div>
-            <Button onClick={createNewForm} className="rldatix-button-success shadow-lg">
-              <Plus className="w-4 h-4 mr-2" />
+            <Button onClick={createNewForm} className="rldatix-button-primary shadow-xl px-6 py-3 text-lg">
+              <Plus className="w-5 h-5 mr-3" />
               New Form
             </Button>
           </div>
@@ -56,36 +59,36 @@ const AppraisalBuilder = () => {
       </header>
 
       <div className="container mx-auto px-6 py-8">
-        <div className="grid grid-cols-12 gap-6">
+        <div className="grid grid-cols-12 gap-8">
           {/* Sidebar - Form List */}
           <div className="col-span-3">
-            <Card className="shadow-xl border-0 overflow-hidden">
+            <Card className="shadow-2xl border-0 overflow-hidden">
               <CardHeader className="rldatix-gradient text-white">
-                <CardTitle className="text-lg font-semibold">Form Templates</CardTitle>
+                <CardTitle className="text-xl font-bold">Form Templates</CardTitle>
               </CardHeader>
-              <CardContent className="p-4 bg-white">
-                <div className="space-y-2">
+              <CardContent className="p-6 bg-white">
+                <div className="space-y-3">
                   {forms.map(form => (
                     <Button
                       key={form.id}
                       variant={currentForm?.id === form.id ? "default" : "ghost"}
-                      className={`w-full justify-start text-left h-auto py-3 ${
+                      className={`w-full justify-start text-left h-auto py-4 px-4 ${
                         currentForm?.id === form.id 
-                          ? 'rldatix-button-primary' 
-                          : 'hover:bg-[hsl(var(--rldatix-light-green))] hover:text-[hsl(var(--rldatix-green))]'
+                          ? 'rldatix-button-primary shadow-lg' 
+                          : 'hover:bg-[hsl(var(--rldatix-light-blue))] hover:text-[hsl(var(--rldatix-navy))] border border-gray-200'
                       }`}
                       onClick={() => setCurrentForm(form)}
                     >
                       <div>
-                        <div className="font-medium truncate">{form.title}</div>
-                        <div className="text-xs opacity-70">
+                        <div className="font-semibold truncate text-base">{form.title}</div>
+                        <div className="text-sm opacity-80 mt-1">
                           {form.sections.length} sections
                         </div>
                       </div>
                     </Button>
                   ))}
                   {forms.length === 0 && (
-                    <p className="text-muted-foreground text-center py-8">
+                    <p className="text-muted-foreground text-center py-12 text-lg">
                       No forms created yet
                     </p>
                   )}
@@ -99,41 +102,41 @@ const AppraisalBuilder = () => {
             {currentForm ? (
               <>
                 {/* Tab Navigation */}
-                <div className="flex space-x-1 mb-6">
+                <div className="flex space-x-2 mb-8">
                   <Button
                     variant={activeTab === 'builder' ? 'default' : 'outline'}
                     onClick={() => setActiveTab('builder')}
-                    className={`rounded-r-none ${
+                    className={`rounded-r-none px-6 py-3 text-lg ${
                       activeTab === 'builder' 
-                        ? 'rldatix-button-primary' 
-                        : 'border-[hsl(var(--rldatix-bright-green))] text-[hsl(var(--rldatix-green))] hover:bg-[hsl(var(--rldatix-light-green))]'
+                        ? 'rldatix-button-primary shadow-lg' 
+                        : 'border-[hsl(var(--rldatix-blue))] text-[hsl(var(--rldatix-navy))] hover:bg-[hsl(var(--rldatix-light-blue))]'
                     }`}
                   >
-                    <Settings className="w-4 h-4 mr-2" />
+                    <Settings className="w-5 h-5 mr-3" />
                     Builder
                   </Button>
                   <Button
                     variant={activeTab === 'preview' ? 'default' : 'outline'}
                     onClick={() => setActiveTab('preview')}
-                    className={`rounded-none ${
+                    className={`rounded-none px-6 py-3 text-lg ${
                       activeTab === 'preview' 
-                        ? 'rldatix-button-primary' 
-                        : 'border-[hsl(var(--rldatix-bright-green))] text-[hsl(var(--rldatix-green))] hover:bg-[hsl(var(--rldatix-light-green))]'
+                        ? 'rldatix-button-primary shadow-lg' 
+                        : 'border-[hsl(var(--rldatix-blue))] text-[hsl(var(--rldatix-navy))] hover:bg-[hsl(var(--rldatix-light-blue))]'
                     }`}
                   >
-                    <Eye className="w-4 h-4 mr-2" />
+                    <Eye className="w-5 h-5 mr-3" />
                     Preview
                   </Button>
                   <Button
                     variant={activeTab === 'workflow' ? 'default' : 'outline'}
                     onClick={() => setActiveTab('workflow')}
-                    className={`rounded-l-none ${
+                    className={`rounded-l-none px-6 py-3 text-lg ${
                       activeTab === 'workflow' 
-                        ? 'rldatix-button-primary' 
-                        : 'border-[hsl(var(--rldatix-bright-green))] text-[hsl(var(--rldatix-green))] hover:bg-[hsl(var(--rldatix-light-green))]'
+                        ? 'rldatix-button-primary shadow-lg' 
+                        : 'border-[hsl(var(--rldatix-blue))] text-[hsl(var(--rldatix-navy))] hover:bg-[hsl(var(--rldatix-light-blue))]'
                     }`}
                   >
-                    <Save className="w-4 h-4 mr-2" />
+                    <Save className="w-5 h-5 mr-3" />
                     Workflow
                   </Button>
                 </div>
@@ -150,17 +153,17 @@ const AppraisalBuilder = () => {
                 )}
               </>
             ) : (
-              <Card className="shadow-xl border-0 overflow-hidden">
-                <CardContent className="p-12 text-center bg-white">
-                  <div className="w-20 h-20 bg-[hsl(var(--rldatix-light-green))] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                    <Plus className="w-10 h-10 text-[hsl(var(--rldatix-green))]" />
+              <Card className="shadow-2xl border-0 overflow-hidden">
+                <CardContent className="p-16 text-center bg-white">
+                  <div className="w-24 h-24 bg-[hsl(var(--rldatix-light-blue))] rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl">
+                    <Plus className="w-12 h-12 text-[hsl(var(--rldatix-navy))]" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-3 text-[hsl(var(--rldatix-green))]">Create Your First Form</h3>
-                  <p className="text-muted-foreground mb-8 text-lg">
+                  <h3 className="text-3xl font-bold mb-4 text-[hsl(var(--rldatix-navy))]">Create Your First Form</h3>
+                  <p className="text-muted-foreground mb-10 text-xl max-w-md mx-auto">
                     Start building appraisal forms with our powerful template builder
                   </p>
-                  <Button onClick={createNewForm} size="lg" className="rldatix-button-primary shadow-lg px-8 py-3">
-                    <Plus className="w-5 h-5 mr-2" />
+                  <Button onClick={createNewForm} size="lg" className="rldatix-button-primary shadow-xl px-10 py-4 text-lg">
+                    <Plus className="w-6 h-6 mr-3" />
                     Create New Form
                   </Button>
                 </CardContent>

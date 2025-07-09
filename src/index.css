@@ -1,8 +1,9 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* RLDATIX Official Design System from rldatix.com
 All colors MUST be HSL.
 */
 
@@ -17,19 +18,19 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    /* RLDATIX Primary - Deep Green */
-    --primary: 142 71% 20%;
+    /* RLDATIX Primary - Deep Navy Blue */
+    --primary: 214 87% 27%;
     --primary-foreground: 0 0% 100%;
 
-    /* RLDATIX Secondary - Light Green */
-    --secondary: 142 71% 90%;
-    --secondary-foreground: 142 71% 20%;
+    /* RLDATIX Secondary - Light Blue */
+    --secondary: 200 100% 95%;
+    --secondary-foreground: 214 87% 27%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    /* RLDATIX Accent - Bright Green */
-    --accent: 142 71% 45%;
+    /* RLDATIX Accent - Bright Blue */
+    --accent: 200 100% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -37,67 +38,68 @@ All colors MUST be HSL.
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 142 71% 20%;
+    --ring: 214 87% 27%;
 
     --radius: 0.5rem;
 
     /* RLDATIX Sidebar Colors */
-    --sidebar-background: 142 71% 20%;
+    --sidebar-background: 214 87% 27%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 142 71% 45%;
+    --sidebar-primary: 200 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 142 71% 25%;
+    --sidebar-accent: 214 87% 32%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 142 71% 25%;
-    --sidebar-ring: 142 71% 45%;
+    --sidebar-border: 214 87% 32%;
+    --sidebar-ring: 200 100% 50%;
 
-    /* RLDATIX Custom Variables */
+    /* RLDATIX Official Brand Colors */
     --rldatix-navy: 214 87% 27%;
-    --rldatix-green: 142 71% 20%;
-    --rldatix-bright-green: 142 71% 45%;
-    --rldatix-light-green: 142 71% 90%;
+    --rldatix-blue: 200 100% 50%;
+    --rldatix-light-blue: 200 100% 95%;
+    --rldatix-teal: 180 100% 35%;
     --rldatix-success: 142 71% 45%;
-    --rldatix-orange: 39 100% 50%;
-    --rldatix-red: 0 84% 60%;
+    --rldatix-warning: 39 100% 50%;
+    --rldatix-error: 0 84% 60%;
+    --rldatix-purple: 260 100% 65%;
   }
 
   .dark {
-    --background: 142 71% 8%;
+    --background: 214 87% 8%;
     --foreground: 0 0% 98%;
 
-    --card: 142 71% 12%;
+    --card: 214 87% 12%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 142 71% 12%;
+    --popover: 214 87% 12%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 142 71% 45%;
-    --primary-foreground: 142 71% 8%;
+    --primary: 200 100% 50%;
+    --primary-foreground: 214 87% 8%;
 
-    --secondary: 142 71% 15%;
+    --secondary: 214 87% 15%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 142 71% 15%;
+    --muted: 214 87% 15%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 142 71% 45%;
-    --accent-foreground: 142 71% 8%;
+    --accent: 200 100% 50%;
+    --accent-foreground: 214 87% 8%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 142 71% 15%;
-    --input: 142 71% 15%;
-    --ring: 142 71% 45%;
+    --border: 214 87% 15%;
+    --input: 214 87% 15%;
+    --ring: 200 100% 50%;
 
-    --sidebar-background: 142 71% 4%;
+    --sidebar-background: 214 87% 4%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 142 71% 45%;
-    --sidebar-primary-foreground: 142 71% 4%;
-    --sidebar-accent: 142 71% 12%;
+    --sidebar-primary: 200 100% 50%;
+    --sidebar-primary-foreground: 214 87% 4%;
+    --sidebar-accent: 214 87% 12%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 142 71% 12%;
-    --sidebar-ring: 142 71% 45%;
+    --sidebar-border: 214 87% 12%;
+    --sidebar-ring: 200 100% 50%;
   }
 }
 
@@ -111,21 +113,33 @@ All colors MUST be HSL.
   }
 }
 
-/* RLDATIX Custom Utility Classes */
+/* RLDATIX Official Utility Classes */
 @layer utilities {
   .rldatix-gradient {
-    @apply bg-gradient-to-r from-[hsl(var(--rldatix-green))] to-[hsl(var(--rldatix-bright-green))];
+    @apply bg-gradient-to-r from-[hsl(var(--rldatix-navy))] to-[hsl(var(--rldatix-blue))];
   }
   
   .rldatix-card-gradient {
-    @apply bg-gradient-to-br from-[hsl(var(--rldatix-light-green))] to-white;
+    @apply bg-gradient-to-br from-[hsl(var(--rldatix-light-blue))] to-white;
   }
   
   .rldatix-button-primary {
-    @apply bg-[hsl(var(--rldatix-bright-green))] hover:bg-[hsl(var(--rldatix-green))] text-white;
+    @apply bg-[hsl(var(--rldatix-blue))] hover:bg-[hsl(var(--rldatix-navy))] text-white;
   }
   
   .rldatix-button-success {
-    @apply bg-[hsl(var(--rldatix-success))] hover:bg-[hsl(var(--rldatix-green))] text-white;
+    @apply bg-[hsl(var(--rldatix-success))] hover:bg-[hsl(var(--rldatix-navy))] text-white;
+  }
+
+  .rldatix-sentiment-positive {
+    @apply bg-[hsl(var(--rldatix-success))] text-white;
+  }
+
+  .rldatix-sentiment-neutral {
+    @apply bg-[hsl(var(--rldatix-warning))] text-white;
+  }
+
+  .rldatix-sentiment-negative {
+    @apply bg-[hsl(var(--rldatix-error))] text-white;
   }
 }
