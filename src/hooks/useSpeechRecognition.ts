@@ -1,5 +1,5 @@
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 
 interface UseSpeechRecognitionProps {
   onResult: (transcript: string) => void;
@@ -10,6 +10,15 @@ export const useSpeechRecognition = ({ onResult, onError }: UseSpeechRecognition
   const [isListening, setIsListening] = useState(false);
   const [isSupported, setIsSupported] = useState(false);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
+
+  // Check for speech recognition support on mount
+  useEffect(() => {
+    const supported = 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window;
+    setIsSupported(supported);
+    if (!supported) {
+      onError?.('Speech recognition is not supported in this browser');
+    }
+  }, [onError]);
 
   const initializeRecognition = useCallback(() => {
     if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
