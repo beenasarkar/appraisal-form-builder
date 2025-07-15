@@ -40,7 +40,7 @@ const AppraisalBuilder = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
               {/* RLDATIX Official Logo */}
-              <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-xl p-2">
+              <div className="w-32 h-32 bg-white rounded-xl flex items-center justify-center shadow-xl p-2">
                 <img 
                   src="/lovable-uploads/d00e8261-404f-4fc4-ac5c-102008f24b5e.png" 
                   alt="RLDATIX Logo" 
